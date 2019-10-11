@@ -6,7 +6,6 @@ class SignUp extends Component {
   constructor(props) {
     super(props);
     const initState = {
-      user: [],
       username: '',
       password: ''
     };
@@ -19,7 +18,12 @@ class SignUp extends Component {
   };
 
   handleSubmit = e => {
-    this.props.addUser(this.state.user);
+    e.preventDefault();
+
+    this.props.addUser({
+      username: this.state.username,
+      password: this.state.password
+    });
   };
 
   render() {
@@ -51,13 +55,7 @@ class SignUp extends Component {
             />
           </div>
 
-          <button
-            type="submit"
-            onClick={this.handleSubmit}
-            className="btn btn-primary"
-          >
-            Submit
-          </button>
+          <input type="submit" className="btn btn-primary" value="Submit" />
         </form>
       </div>
     );

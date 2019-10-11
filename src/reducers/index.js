@@ -8,23 +8,18 @@ const reducer = (state = initstate, action) => {
   switch (action.type) {
     case ADD_USER:
       const stateObj = Object.assign({}, state, {
-        users: [
-          ...state.users,
-          {
-            username: action.username,
-            password: action.password
-          }
-        ]
+        users: [...state.users, action.payload]
       });
 
       history.push('/login');
+
       return stateObj;
 
     case USER_LOGIN:
       return state.users.map(user => {
         if (
-          user.username === action.username &&
-          user.password === action.password
+          user.username === action.payload.username &&
+          user.password === action.payload.password
         ) {
           history.push('/dashboard');
         }
